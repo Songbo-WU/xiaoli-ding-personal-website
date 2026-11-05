@@ -192,3 +192,21 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .official-mark.rils-mark img{height:28px}
 .strip-inner{column-gap:20px}
 @media(min-width:801px){.strip-inner a + a{padding-left:14px}}
+
+/* Full CV honours with a compact homepage archive. */
+.awards-list li{align-items:start}
+.awards-list li>div{min-width:0}
+.awards-list small{display:block;font-size:.87em;line-height:1.6;color:#686a65;margin-top:5px}
+.service-grid .awards-list:not(.compact) li{grid-template-columns:5.1rem minmax(0,1fr);gap:12px}
+.awards-archive{border-top:1px solid var(--line);margin-top:16px}
+.awards-archive summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;list-style:none;padding:16px 0;font-size:15px;font-weight:600;color:var(--wine)}
+.awards-archive summary::-webkit-details-marker{display:none}
+.awards-archive summary small{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+.awards-toggle{font-size:24px;transition:transform .2s}
+.awards-archive[open] .awards-toggle{transform:rotate(45deg)}
+.recognition-list small{display:block;color:var(--wine);font-size:.88em}
+.cv .awards-list li{grid-template-columns:110px minmax(0,1fr);font-size:16px;gap:20px;border-bottom:1px solid var(--line);padding:15px 0;break-inside:avoid}
+.cv .awards-list li>span{font-size:17px;font-weight:700;color:var(--wine)}
+.cv .recognition-list li{font-size:16px;break-inside:avoid}
+@media(max-width:560px){.cv .awards-list li{grid-template-columns:85px minmax(0,1fr);gap:12px}}
+@media print{.cv .awards-list li,.cv .recognition-list li{font-size:10pt}.cv .awards-list li>span{font-size:10pt}}
