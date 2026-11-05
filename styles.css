@@ -212,3 +212,11 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 @media print{.cv .awards-list li,.cv .recognition-list li{font-size:10pt}.cv .awards-list li>span{font-size:10pt}}
 
 @media print{.cv .recognition-list small{font-size:10pt}}
+
+/* Improve readability of recognition and service content. */
+.service-grid .plain-list li{font-size:16px}
+.service-grid .awards-list small{font-size:14px}
+.service-grid .small-note{font-size:14px}
+.service-grid h3{font-size:17px}
+.service-grid .awards-archive summary{font-size:16px}
+.service-grid .awards-archive summary small{font-size:13px}
