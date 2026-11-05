@@ -220,3 +220,11 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .service-grid h3{font-size:17px}
 .service-grid .awards-archive summary{font-size:16px}
 .service-grid .awards-archive summary small{font-size:13px}
+
+/* Match CV profile information to the homepage, including printed copies. */
+.cv .cv-chinese{font-family:serif;font-size:26px;letter-spacing:7px;color:#65645e;margin:15px 0 20px}
+.cv .hero-qualifications{margin:0 0 18px}
+.cv .hero-appointments{gap:0}
+.cv .hero-appointments p{margin:6px 0}
+.cv .hero-institution{margin-top:14px}
+@media print{.cv .cv-chinese{font-size:15pt;margin:8px 0 12px}.cv .hero-qualifications{font-size:11pt;margin-bottom:10px}.cv .hero-appointments p{font-size:11pt;line-height:1.5;margin:4px 0}.cv .hero-institution{font-size:11pt;margin-top:10px}}
