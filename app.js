@@ -4,8 +4,26 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
 const menu=document.querySelector('.menu-toggle');
 if(menu){const nav=document.querySelector('#navigation');menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation');nav.classList.toggle('open',open)});nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation');menu.focus()}})}
 function pubURL(p){if(p.url)return p.url;if(p.doi)return 'https://doi.org/'+p.doi;return 'https://scholar.google.com/scholar?q='+encodeURIComponent(p.title||p.citation)}
-function renderPub(p,compact=false){const url=esc(pubURL(p));const hasTitle=Boolean(p.authors);return `<article class="pub-item"><div class="pub-year">${p.year}${!compact?`<span class="pub-type">${esc(p.type)}</span>`:''}</div><div>${hasTitle?`<h3><a href="${url}" target="_blank" rel="noopener">${esc(p.title)}</a></h3><p class="pub-authors">${esc(p.authors).replace(/X\. Ding/g,'<strong>X. Ding</strong>')}</p><p class="pub-journal">${esc(p.journal)}</p>`:`<p class="pub-citation">${esc(p.citation)}</p>`}${!compact?`<p class="pub-provenance">${esc(p.source)} · <a href="${url}" target="_blank" rel="noopener">${p.url?'Scholar record':p.doi?'DOI':'Find on Scholar'} ↗</a></p>`:''}</div><a class="pub-arrow" href="${url}" target="_blank" rel="noopener" aria-label="Open publication: ${esc(p.title)}">↗</a></article>`}
-const recent=document.querySelector('#recent-publications');if(recent)recent.innerHTML=pubs.filter(p=>p.authors&&p.year===2026).slice(0,5).map(p=>renderPub(p,true)).join('');
+function renderPub(publication, compact = false) {
+  const url = esc(pubURL(publication));
+  const type = compact ? '' : `<span class="pub-type">${esc(publication.type)}</span>`;
+  const authors = esc(publication.authors).replace(/X\. Ding/g, '<strong>X. Ding</strong>');
+  const venue = publication.journal ? `<p class="pub-journal">${esc(publication.journal)}</p>` : '';
+  const linkLabel = publication.url ? 'Scholar record' : publication.doi ? 'DOI' : 'Find on Scholar';
+  const provenance = compact ? '' : `<p class="pub-provenance">${esc(publication.source)} · <a href="${url}" target="_blank" rel="noopener">${linkLabel} ↗</a></p>`;
+  const title = esc(publication.title);
+  return `<article class="pub-item">
+    <div class="pub-year">${publication.year}${type}</div>
+    <div>
+      <h3><a href="${url}" target="_blank" rel="noopener">${title}</a></h3>
+      <p class="pub-authors">${authors}</p>
+      ${venue}
+      ${provenance}
+    </div>
+    <a class="pub-arrow" href="${url}" target="_blank" rel="noopener" aria-label="Open publication: ${title}">↗</a>
+  </article>`;
+}
+const recent=document.querySelector('#recent-publications');if(recent)recent.innerHTML=pubs.filter(p=>p.source.startsWith('Google Scholar')&&p.year===2026).slice(0,5).map(p=>renderPub(p,true)).join('');
 const results=document.querySelector('#publication-results');
 if(results){const q=document.querySelector('#pub-search'),year=document.querySelector('#pub-year'),type=document.querySelector('#pub-type'),count=document.querySelector('#result-count'),prev=document.querySelector('#prev-page'),next=document.querySelector('#next-page'),indicator=document.querySelector('#page-indicator');let page=1;const size=15;const params=new URLSearchParams(location.search);q.value=params.get('q')||'';[...new Set(pubs.map(p=>p.year))].sort((a,b)=>b-a).forEach(y=>{const opt=document.createElement('option');opt.value=y;opt.textContent=y;year.appendChild(opt)});if([...year.options].some(o=>o.value===params.get('year')))year.value=params.get('year');if([...type.options].some(o=>o.value===params.get('type')))type.value=params.get('type');
 const normalize=s=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[‐‑–—]/g,'-');
