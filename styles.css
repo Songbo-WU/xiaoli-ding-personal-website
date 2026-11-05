@@ -228,3 +228,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .cv .hero-appointments p{margin:6px 0}
 .cv .hero-institution{margin-top:14px}
 @media print{.cv .cv-chinese{font-size:15pt;margin:8px 0 12px}.cv .hero-qualifications{font-size:11pt;margin-bottom:10px}.cv .hero-appointments p{font-size:11pt;line-height:1.5;margin:4px 0}.cv .hero-institution{font-size:11pt;margin-top:10px}}
+
+/* Satellite observation of a city, parcels and geospatial data nodes. */
+.home-profile::before{background-image:url("assets/geospatial-city.svg");background-size:min(1100px,94vw) auto;background-position:right -7vw center;opacity:.16}
+@media(max-width:800px){.home-profile::before{background-size:125vw auto;background-position:right -22vw center;opacity:.12}}
