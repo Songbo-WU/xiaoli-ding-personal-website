@@ -240,7 +240,10 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
   font-weight: 600;
   letter-spacing: -.035em;
 }
-.home-profile .hero h1 { font-size: clamp(43px, 6vw, 76px); }
+.home-profile .hero h1 {
+  font-size: clamp(43px, 6vw, 76px);
+  font-weight: 550;
+}
 .cv .page-intro h1 { font-size: clamp(34px, 6vw, 64px); }
 #about .education { margin-top: 0; padding-top: 0; border-top: 0; }
 .service-grid .editorial-heading { margin-top: 24px; }
