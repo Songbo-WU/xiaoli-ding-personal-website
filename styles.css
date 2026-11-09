@@ -251,3 +251,12 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 @media print {
   .cv .page-intro h1 { font-size: 30pt; }
 }
+
+#projects .section-title {
+  container-type: inline-size;
+}
+
+#projects .section-title h2 {
+  font-size: min(48px, 13cqi);
+  white-space: nowrap;
+}
